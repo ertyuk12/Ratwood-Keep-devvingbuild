@@ -191,6 +191,13 @@
 	check_other_side = TRUE
 	invis_without_trait = TRUE
 
+/obj/structure/fluff/traveltile/succubus
+	can_gain_with_sight = TRUE
+	can_gain_by_walking = TRUE
+	check_other_side = TRUE
+	invis_without_trait = TRUE
+
+
 /obj/structure/fluff/traveltile/goblin
 	required_trait = TRAIT_GOBLINCAMP
 	can_gain_with_sight = TRUE

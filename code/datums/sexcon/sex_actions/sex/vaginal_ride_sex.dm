@@ -45,7 +45,7 @@
 
 		if(HAS_TRAIT(user, TRAIT_DEATHBYSNUSNU))
 			user.sexcon.try_pelvis_crush(target)
-		
+
 		user.visible_message(user.sexcon.spanify_force("[user] [user.sexcon.get_generic_force_adjective()] rides [target]."))
 	playsound(target, 'sound/misc/mat/segso.ogg', 50, TRUE, -2, ignore_walls = FALSE)
 	do_thrust_animate(user, target)
@@ -64,6 +64,7 @@
 		target.try_impregnate(user)
 		target.virginity = FALSE
 		user.virginity = FALSE
+		try_succubus_drain(user, target)
 
 /datum/sex_action/vaginal_ride_sex/on_finish(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	..()

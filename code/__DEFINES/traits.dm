@@ -98,8 +98,11 @@
 #define TRAIT_POISONBITE "Venomous Bite" // Adds tox damage on bites
 #define TRAIT_RITUALIST "Ritualist" // Allows use of ritual feathers
 #define TRAIT_DEATHBARGAIN "Death Bargain" // Used by UNDERMAIDEN'S BARGAIN
+#define TRAIT_CUMDETECT "Succubus's senses"
 #define TRAIT_MATTHIOS_BRAND "Matthios Brand"
 #define TRAIT_MATTHIOS_BRAND_OLD "Old Matthios Brand"
+#define TRAIT_SUCCUBUS "Succubus"
+#define TRAIT_LESSER_SUCCUBUS "Lesser Succubus"
 
 // PATRON CURSE TRAITS
 #define TRAIT_CURSE "Curse" //source
@@ -191,6 +194,9 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_EXCOMMUNICATED = span_info("The Ten are not on my side any longer..."),
 	TRAIT_RITUALIST = span_info("I am skilled in the holy arts. Using a ritual feather, I can more deftly channel my God's powers via runes."),
 	TRAIT_DEATHBARGAIN = span_info("A horrible deal has been prepared in your name. May you never see it fulfilled..."),
+	TRAIT_CUMDETECT = span_info("I can detect when one is ready to make love."),
+	TRAIT_SUCCUBUS = span_info("I drain essence from those I pleasure."),
+	TRAIT_LESS_SUCCUBUS = span_info("I feed myself on the lust of those I pleasure."),
 ))
 
 // trait accessor defines
@@ -422,7 +428,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define MADE_UNCLONEABLE "made-uncloneable"
 #define TIMESTOP_TRAIT "timestop"
 #define HUGBOX_TRAIT "hugbox"
-
 
 #define TRAIT_I_AM_INVISIBLE_ON_A_BOAT "invisible_on_tram"
 

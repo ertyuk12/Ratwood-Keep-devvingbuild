@@ -470,3 +470,38 @@
 	name = "Matthios' Brand"
 	desc = "The Robber God has emblazoned his mark upon my face. The shame is immeasurable."
 	icon_state = "stressvb"
+//succubi stuff
+/datum/status_effect/debuff/succuhate
+	id = "succuhate"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/succuhate
+	effectedstats = list("speed" = 2, "endurance" = -4, "perception" = -4, "intelligence" = -4)
+	duration = 60 MINUTES
+
+/datum/status_effect/debuff/succuhate/on_apply()
+	. = ..()
+	owner.remove_stress(/datum/stressevent/cumsuccubus)
+	owner.add_stress(/datum/stressevent/nosuccubus)
+
+
+/atom/movable/screen/alert/status_effect/debuff/succuhate
+	name = "TRUE LOVE"
+	desc = "My body aches! I need that pleasure again!"
+	icon_state = "debuff"
+
+
+
+/datum/status_effect/debuff/succucharm
+	id = "succucharm"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/succuhate
+	effectedstats = list("speed" = -2, "perception" = -4, "intelligence" = -4)
+	duration = 30 SECONDS
+
+
+
+
+/atom/movable/screen/alert/status_effect/debuff/succucharm
+	name = "True Love..?"
+	desc = "I feel the urge to make love!"
+	icon_state = "debuff"
+
+

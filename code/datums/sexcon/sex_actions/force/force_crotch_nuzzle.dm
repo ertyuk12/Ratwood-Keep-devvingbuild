@@ -30,6 +30,7 @@
 
 	user.sexcon.perform_sex_action(user, 0.5, 0, TRUE)
 	target.sexcon.handle_passive_ejaculation()
+	try_succubus_charm(user, target)
 
 /datum/sex_action/force_crotch_nuzzle/on_finish(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	..()

@@ -9,6 +9,7 @@
 #define ROLE_MANIAC				"Maniac"
 #define ROLE_WEREWOLF			"Werewolf"
 #define ROLE_VAMPIRE			"Vampire"
+#define ROLE_SUCCUBUS			"Succubus"
 #define ROLE_NBEAST				"Vampire Lord"
 #define ROLE_BANDIT				"Bandit"
 #define ROLE_DELF				"Dark Elf"
@@ -66,7 +67,8 @@ GLOBAL_LIST_INIT(special_roles_rogue, list(
 	ROLE_WEREWOLF = /datum/antagonist/werewolf,
 	ROLE_ZIZOIDCULTIST = /datum/antagonist/zizocultist,
 	ROLE_NBEAST = /datum/antagonist/vampirelord,
-	ROLE_LICH = /datum/antagonist/lich
+	ROLE_LICH = /datum/antagonist/lich,
+	ROLE_SUCCUBUS = /datum/antagonist/succubus,
 ))
 
 //Job defines for what happens when you fail to qualify for any job during job selection

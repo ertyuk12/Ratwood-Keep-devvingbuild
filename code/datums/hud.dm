@@ -8,6 +8,7 @@ GLOBAL_LIST_INIT(huds, list(
 	ANTAG_HUD_TRAITOR = new/datum/atom_hud/antag/hidden(), // zizocult
 	ANTAG_HUD_REV = new/datum/atom_hud/antag(), //peasant rebel
 	ANTAG_HUD_VAMPIRE = new/datum/atom_hud/antag(),
+	ANTAG_HUD_SUCCUBUS = new/datum/atom_hud/antag(),
 	))
 
 /datum/atom_hud

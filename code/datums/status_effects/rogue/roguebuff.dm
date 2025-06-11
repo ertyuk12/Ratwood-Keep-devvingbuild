@@ -327,22 +327,22 @@
 		owner.update_transform()
 	else
 		to_chat(owner, span_warning("I can feel arcyne magick supplement my tiny frame!"))
-		
-	
+
+
 
 
 /datum/status_effect/buff/enlarge/on_remove()
-	. = ..()   
+	. = ..()
 	if(!(isseelie(owner)))
 		to_chat(owner, span_warning("I feel myself shrinking again.."))
-		REMOVE_TRAIT(owner, TRAIT_DEATHBYSNUSNU, MAGIC_TRAIT) 
+		REMOVE_TRAIT(owner, TRAIT_DEATHBYSNUSNU, MAGIC_TRAIT)
 		owner.transform = owner.transform.Translate(0, -(0.25 * 16))
 		owner.transform = owner.transform.Scale(1/1.25, 1/1.25)
-		owner.mob_size -= 1  
+		owner.mob_size -= 1
 		owner.update_transform()
 	else
 		to_chat(owner, span_warning("I can feel the strengthening magicks fade from my small body.."))
-	
+
 
 /datum/status_effect/buff/seelie_drugs
 	id = "seelie drugs"
@@ -718,7 +718,7 @@
 /atom/movable/screen/alert/status_effect/debuff/ritesexpended
 	name = "Rites Complete"
 	desc = "It will take time before I can next perform a rite."
-	icon_state = "ritesexpended"	
+	icon_state = "ritesexpended"
 
 #define BLESSINGOFSUN_FILTER "sun_glow"
 /atom/movable/screen/alert/status_effect/buff/guidinglight
@@ -787,7 +787,7 @@
 /atom/movable/screen/alert/status_effect/buff/flylordstriage
 	name = "Flylord's Triage"
 	desc = "Pestra's servants crawl through my pores and wounds!"
-	icon_state = "buff"	
+	icon_state = "buff"
 
 /datum/status_effect/buff/flylordstriage/tick()
 	playsound(owner, 'sound/misc/fliesloop.ogg', 100, FALSE, -1)
@@ -928,3 +928,25 @@
 /datum/status_effect/buff/calmed/on_remove()
 	. = ..()
 	to_chat(owner, span_warning("My mind is my own again, no longer awash with foggy peace!"))
+
+
+/datum/status_effect/buff/succulove
+	id = "succulove"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/succulove
+	effectedstats = list("speed" = 5, "endurance" = 10, "perception" = -4, "intelligence" = -2)
+	duration = 15 MINUTES
+
+/datum/status_effect/buff/succulove/on_apply()
+	. = ..()
+	owner.add_stress(/datum/stressevent/cumsuccubus)
+	owner.remove_stress(/datum/stressevent/nosuccubus)
+
+/datum/status_effect/buff/succulove/on_remove()
+	. = ..()
+	owner.apply_status_effect(/datum/status_effect/debuff/succuhate)
+
+
+/atom/movable/screen/alert/status_effect/buff/succulove
+	name = "True Love"
+	desc = "My body feels like it can endure anything..As long as I get to feel such pleasure again..."
+	icon_state = "buff"

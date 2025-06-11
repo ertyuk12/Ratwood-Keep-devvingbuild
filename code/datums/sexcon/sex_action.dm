@@ -44,3 +44,85 @@
 
 /datum/sex_action/proc/shows_on_menu(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	return TRUE
+
+
+//add this to any sex actions you want the succubus to be able to steal essence from
+
+/datum/sex_action/proc/try_succubus_drain(mob/living/carbon/human/succ, mob/living/carbon/human/victim)
+	var/mob/living/carbon/human/drainer
+	var/mob/living/carbon/human/drained
+	var/truedrain = FALSE
+	if(HAS_TRAIT(succ, TRAIT_SUCCUBUS) && !HAS_TRAIT(victim, TRAIT_SUCCUBUS))
+		drainer = succ
+		drained = victim
+		truedrain = TRUE
+	if(!HAS_TRAIT(succ, TRAIT_SUCCUBUS) && HAS_TRAIT(victim, TRAIT_SUCCUBUS))
+		drainer = victim
+		drained = succ
+		truedrain = TRUE
+	if (drained && drainer && truedrain)
+		var/datum/antagonist/succubus/SD = drainer.mind.has_antag_datum(/datum/antagonist/succubus)
+		if (!SD)
+			return
+		to_chat(drainer, span_love("My victim surrenders [(victim.gender == FEMALE) ? "her" : "his"] essence to me..It feels good!"))
+		if (drained.STASTR > 5 && drainer.STASTR < 15) // sorry bucko, you aren't becoming a omnipotent horny entity
+			drained.change_stat("strength", -2)
+			if (!SD.starved) //prevents exploiting by starving to gain extra stats. Also, kinda makes sense, it's hard to steal more strength when you lack your own!
+				drainer.change_stat("strength", 1)
+		else
+			drained.apply_damage(10, TOX)
+		if (drained.STACON > 5  && drainer.STACON < 15)
+			drained.change_stat("constitution", -2)
+			if (!SD.starved)
+				drainer.change_stat("constitution", 1)
+		else
+			drained.apply_damage(10, TOX)
+
+		if (drained.STAINT > 5 && drainer.STAINT < 15)
+			drained.change_stat("intelligence", -2)
+			if (!SD.starved)
+				drainer.change_stat("intelligence", 1)
+		else
+			drained.apply_damage(10, TOX)
+		if (drained.STAEND > 5 && drainer.STAEND < 15)
+			drained.change_stat("endurance", -2)
+			if (!SD.starved)
+				drainer.change_stat("endurance", 1)
+		else
+			drained.apply_damage(10, TOX)
+
+		SD.handle_vitae(150) // enough for one heal
+		if (!drained.has_status_effect(/datum/status_effect/debuff/succuhate) && !drained.has_status_effect(/datum/status_effect/buff/succulove))
+			SD.handle_vitae(50)
+			to_chat(drainer, span_love("Fresh essence! It tastes wonderful!"))
+			SD.totalensnared += 1
+		to_chat(drained, span_love("That felt so good...I'll need more soon.."))
+		drained.apply_status_effect(/datum/status_effect/buff/succulove)
+		drained.sexcon.adjust_charge(300)
+		drainer.sexcon.adjust_charge(300) // infinite cum for the cum god
+		if (drained.has_status_effect(/datum/status_effect/debuff/succuhate))
+			drained.remove_status_effect(/datum/status_effect/debuff/succuhate)
+		if (drained.has_status_effect(/datum/status_effect/debuff/succucharm))
+			drained.remove_status_effect(/datum/status_effect/debuff/succucharm)
+
+/datum/sex_action/proc/try_succubus_charm(mob/living/carbon/human/succ, mob/living/carbon/human/victim)
+	var/mob/living/carbon/human/drainer
+	var/mob/living/carbon/human/drained
+	if(HAS_TRAIT(succ, TRAIT_SUCCUBUS) && !HAS_TRAIT(victim, TRAIT_SUCCUBUS))
+		drainer = succ
+		drained = victim
+	//	truedrain = TRUE
+	if(!HAS_TRAIT(succ, TRAIT_SUCCUBUS) && HAS_TRAIT(victim, TRAIT_SUCCUBUS))
+		drainer = victim
+		drained = succ
+	if (drained && drainer && !drained.has_status_effect(/datum/status_effect/debuff/succuhate) && !drained.has_status_effect(/datum/status_effect/buff/succulove) && !drained.has_status_effect(/datum/status_effect/debuff/succucharm))
+		to_chat(drainer, span_love("[drained.name] lusts for my body, now."))
+		if (drained.patron.type == /datum/patron/divine/eora)
+			to_chat(drained, span_love("I feel drawn to please myself on [drainer.name]..Is this normal..?"))
+		else if (drained.patron.type == /datum/patron/inhumen/baotha)
+			to_chat(drained, span_love("How wonderful, to be tempted by a fellow Baotha devoted like [drainer.name].."))
+		else
+			to_chat(drained, span_love("[drainer.name] is so beautiful..I must have more.."))
+			drained.apply_status_effect(/datum/status_effect/debuff/succucharm)
+		drained.sexcon.adjust_charge(300)
+		drainer.sexcon.adjust_charge(300) // infinite cum for the cum god

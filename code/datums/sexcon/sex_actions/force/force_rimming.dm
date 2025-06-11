@@ -32,7 +32,7 @@
 
 	user.sexcon.perform_sex_action(user, 2, 4, TRUE)
 	user.sexcon.handle_passive_ejaculation()
-
+	try_succubus_charm(user, target)
 	user.sexcon.perform_sex_action(target, 0, 2, FALSE)
 	target.sexcon.handle_passive_ejaculation()
 

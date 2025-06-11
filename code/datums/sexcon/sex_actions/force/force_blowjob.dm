@@ -41,6 +41,7 @@
 	if(user.sexcon.check_active_ejaculation())
 		user.visible_message(span_lovebold("[user] cums into [target]'s throat!"))
 		user.sexcon.cum_into(TRUE)
+		try_succubus_drain(user, target)
 
 	user.sexcon.perform_sex_action(target, 0, 7, FALSE)
 	if(!user.sexcon.considered_limp())

@@ -313,7 +313,7 @@
 		action_target.emote(pick(list("gag", "choke", "gasp")), forced = TRUE)
 
 /datum/sex_controller/proc/perform_sex_action(mob/living/carbon/human/action_target, arousal_amt, pain_amt, giving)
-	if(HAS_TRAIT(user, TRAIT_GOODLOVER))
+	if(HAS_TRAIT(user, TRAIT_GOODLOVER) || HAS_TRAIT(user, TRAIT_SUCCUBUS) || HAS_TRAIT(target, TRAIT_LESSER_SUCCUBUS) )
 		arousal_amt *=1.5
 		if(prob(10))
 			var/lovermessage = pick("This feels so good!","I am in heaven!","This is too good to be possible!","By the ten!","I can't stop, too good!")
@@ -332,7 +332,7 @@
 		arousal_amt = 0
 		pain_amt = 0
 
-	if(!arousal_frozen) 
+	if(!arousal_frozen)
 		adjust_arousal(arousal_amt)
 
 	damage_from_pain(pain_amt)

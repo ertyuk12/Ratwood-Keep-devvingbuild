@@ -32,3 +32,13 @@
 // 	timer = 3 MINUTES
 // 	stressadd = -10
 // 	desc = "<span class='green'>My loins ache in ecstacy!.</span>"
+
+/datum/stressevent/cumsuccubus
+	timer = 15 MINUTES
+	stressadd = -10
+	desc = "<span class='green'>I came, and it was so wonderful! I need to do that again sometime!.</span>"
+
+/datum/stressevent/nosuccubus
+	timer = 60 MINUTES
+	stressadd = 10
+	desc = "<span class='red'>Nothing will ever match the pleasure I felt earlier..I-I need it again....</span>"

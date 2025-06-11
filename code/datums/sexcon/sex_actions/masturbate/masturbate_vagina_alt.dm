@@ -27,7 +27,7 @@
 	playsound(user, 'sound/misc/mat/fingering.ogg', 30, TRUE, -2, ignore_walls = FALSE)
 
 	user.sexcon.perform_sex_action(user, 2, 4, TRUE)
-
+	try_succubus_charm(user, target)
 	user.sexcon.handle_passive_ejaculation()
 
 /datum/sex_action/masturbate_vagina_alt/on_finish(mob/living/carbon/human/user, mob/living/carbon/human/target)

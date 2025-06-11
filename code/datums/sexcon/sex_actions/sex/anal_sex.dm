@@ -64,6 +64,7 @@
 		user.visible_message(span_lovebold("[user] cums into [target]'s butt!"))
 		user.sexcon.cum_into()
 		user.virginity = FALSE
+		try_succubus_drain(user, target)
 
 	if(user.sexcon.considered_limp())
 		user.sexcon.perform_sex_action(target, 1.2, 4, FALSE)

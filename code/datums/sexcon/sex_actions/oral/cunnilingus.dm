@@ -44,6 +44,7 @@
 		target.visible_message(span_lovebold("[target] ejaculates into [user]'s mouth!"))
 		target.sexcon.target = user
 		target.sexcon.cum_into(TRUE)
+		try_succubus_drain(user, target)
 
 /datum/sex_action/cunnilingus/on_finish(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	..()

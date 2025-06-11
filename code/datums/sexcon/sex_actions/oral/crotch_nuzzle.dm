@@ -25,6 +25,7 @@
 /datum/sex_action/crotch_nuzzle/on_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	if(user.sexcon.do_message_signature("[type]"))
 		user.visible_message(user.sexcon.spanify_force("[user] [user.sexcon.get_generic_force_adjective()] nuzzles [target]'s crotch..."))
+		try_succubus_charm(user, target)
 
 	user.sexcon.perform_sex_action(target, 0.5, 0, TRUE)
 	target.sexcon.handle_passive_ejaculation()

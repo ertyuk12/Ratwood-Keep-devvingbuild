@@ -158,6 +158,9 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "N
 				if("Cultists")
 					pick_cultist()
 					log_game("Major Antagonist: Cultists")
+				if("Succubus")
+					pick_succubi()
+					log_game("Minor Antagonist: Succubus")
 				if("None")
 					log_game("Major Antagonist: None")
 		return TRUE
@@ -201,6 +204,11 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "N
 	if(prob(100))
 		pick_bandits()
 		log_game("Minor Antagonist: Bandit")
+
+	if(prob(100))
+		pick_succubi()
+		log_game("Minor Antagonist: Succubus")
+
 
 	if(prob(45))
 		pick_aspirants()
@@ -594,6 +602,66 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "N
 		GLOB.pre_setup_antags |= antag
 	restricted_jobs = list()
 
+
+/datum/game_mode/chaosmode/proc/pick_succubi()
+	var/succremaining = 4
+	restricted_jobs = list(
+	"Duke",
+	"Duke Consort",
+	"Dungeoneer",
+	"Inquisitor",
+	"Confessor",
+	"Watchman",
+	"Man at Arms",
+	"Priest",
+	"Acolyte",
+	"Cleric",
+	"Retinue Captain",
+	"Court Magos",
+	"Templar",
+	"Vanguard",
+	"Warden",
+	"Knight",
+	"Bandit",
+	"Goblin Chief",
+	"Goblin Cook",
+	"Goblin Guard",
+	"Goblin Rabble",
+	"Goblin Smith",
+	"Goblin Shaman"
+	)
+	antag_candidates = get_players_for_role(ROLE_NBEAST)
+	antag_candidates = shuffle(antag_candidates)
+	for(var/datum/mind/succubus in antag_candidates)
+		if(!succremaining)
+			break
+		var/blockme = FALSE
+		if(!(succubus in allantags))
+			blockme = TRUE
+		if(succubus.assigned_role in GLOB.noble_positions)
+			continue
+		if(succubus.assigned_role in GLOB.youngfolk_positions)
+			blockme = TRUE
+		if(blockme)
+			continue
+
+		allantags -= succubus
+		pre_succubi += succubus
+		succubus.special_role = "succubus"
+		succubus.assigned_role = "succubus" // This is a tricky way to prevent double-spawning for the spawn as multiple jobs.
+		succubus.restricted_roles = restricted_jobs.Copy()
+		testing("[key_name(succubus)] has been selected as a SUCCUBUS")
+		log_game("[key_name(succubus)] has been selected as a [succubus.special_role]")
+		antag_candidates.Remove(succubus)
+		succremaining -= 1
+	for(var/antag in pre_succubi)
+		GLOB.pre_setup_antags |= antag
+	restricted_jobs = list()
+
+
+
+
+
 /datum/game_mode/chaosmode/post_setup()
 	set waitfor = FALSE
 ///////////////// VILLAINS
@@ -655,6 +723,16 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "N
 		GLOB.pre_setup_antags -= bandito
 		bandits += bandito
 		SSrole_class_handler.bandits_in_round = TRUE
+
+
+
+///////////////// SUCCUBUS
+	for(var/datum/mind/succubus in pre_succubi)
+		var/datum/antagonist/new_antag = new /datum/antagonist/succubus()
+		//addtimer(CALLBACK(werewolf, TYPE_PROC_REF(/datum/mind, add_antag_datum), new_antag), rand(10,100))
+		succubus.add_antag_datum(new_antag)
+		GLOB.pre_setup_antags -= succubus
+		succubi += succubus
 ///////////////// ASPIRANTS
 	for(var/datum/mind/rogue in pre_aspirants) // Do the aspirant first, so the suppporter works right.
 		if(rogue.special_role == ROLE_ASPIRANT)

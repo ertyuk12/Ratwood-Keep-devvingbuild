@@ -36,6 +36,7 @@
 	playsound(user, 'sound/misc/mat/fingering.ogg', 30, TRUE, -2, ignore_walls = FALSE)
 
 	user.sexcon.perform_sex_action(target, 2, 4, TRUE)
+	try_succubus_charm(user, target)
 
 	target.sexcon.handle_passive_ejaculation()
 

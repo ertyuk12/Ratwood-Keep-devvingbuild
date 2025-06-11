@@ -9,6 +9,7 @@
 #define ANTAG_HUD_TRAITOR 	2 //zizocult
 #define ANTAG_HUD_REV		3
 #define ANTAG_HUD_VAMPIRE	4
+#define ANTAG_HUD_SUCCUBUS	5
 // Notification action types
 #define NOTIFY_JUMP "jump"
 #define NOTIFY_ATTACK "attack"

@@ -31,7 +31,9 @@
 			user.visible_message(user.sexcon.spanify_force("[user] [user.sexcon.get_generic_force_adjective()] fingers [target]'s butt..."))
 	playsound(user, 'sound/misc/mat/fingering.ogg', 30, TRUE, -2, ignore_walls = FALSE)
 
+
 	user.sexcon.perform_sex_action(target, 2, 6, TRUE)
+	try_succubus_charm(user, target)
 	target.sexcon.handle_passive_ejaculation()
 
 /datum/sex_action/masturbate_other_anus/on_finish(mob/living/carbon/human/user, mob/living/carbon/human/target)

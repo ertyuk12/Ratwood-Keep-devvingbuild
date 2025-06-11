@@ -125,7 +125,7 @@
 /mob/living/carbon/human/Stat()
 	..()
 	if(mind)
-		var/datum/antagonist/vampirelord/VD = mind.has_antag_datum(/datum/antagonist/vampirelord)
+		var/datum/antagonist/vampirelord/VD = (mind.has_antag_datum(/datum/antagonist/vampirelord) || mind.has_antag_datum(/datum/antagonist/succubus))
 		if(VD)
 			if(statpanel("Stats"))
 				stat("Vitae:",VD.vitae)
@@ -447,7 +447,7 @@
 					var/obj/item/bodypart/BP = X
 					total_damage += (BP.brute_dam + BP.burn_dam)
 					total_max += BP.max_damage
-				
+
 				var/damage_percent = 0
 				if(total_max > 0)
 					damage_percent = (total_damage / total_max) * 100
@@ -636,7 +636,7 @@
 /mob/living/carbon/human/vv_do_topic(list/href_list)
 	. = ..()
 	if(href_list[VV_HK_REAPPLY_PREFS])
-	
+
 		if(!check_rights(R_SPAWN))
 			return
 		if(!client || !client.prefs)

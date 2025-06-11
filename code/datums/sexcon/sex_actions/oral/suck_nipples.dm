@@ -31,11 +31,12 @@
 	target.sexcon.handle_passive_ejaculation()
 
 	var/milk_to_add = min(max(target.getorganslot(ORGAN_SLOT_BREASTS).breast_size, 1), target.getorganslot(ORGAN_SLOT_BREASTS).milk_stored)
-	if(target.getorganslot(ORGAN_SLOT_BREASTS).lactating && milk_to_add > 0 && prob(25))
+	if((target.getorganslot(ORGAN_SLOT_BREASTS).lactating && milk_to_add > 0 && prob(25)) || HAS_TRAIT(user, TRAIT_SUCCUBUS))
 		user.reagents.add_reagent(/datum/reagent/consumable/milk, milk_to_add)
 		target.getorganslot(ORGAN_SLOT_BREASTS).milk_stored -= milk_to_add
 		to_chat(user, span_notice("I can taste milk."))
 		to_chat(target, span_notice("I can feel milk leak from my buds."))
+		try_succubus_drain(user, target)
 
 /datum/sex_action/suck_nipples/on_finish(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	user.visible_message(span_warning("[user] stops sucking [target]'s nipples ..."))
